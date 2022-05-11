@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".view.fragment.DetailFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="40dp"
+            android:id="@+id/detail_image"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="JUDUL : "
+            android:textColor="@color/black"
+            android:id="@+id/detail_title"
+            android:layout_marginBottom="5dp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TANGGAL RILIS : "
+            android:textColor="@color/black"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/detail_release_date"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SUTRADARA : "
+            android:textColor="@color/black"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/detail_director"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DESKRIPSI : "
+            android:textColor="@color/black"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/detail_description"/>
+    </LinearLayout>
+</ScrollView>

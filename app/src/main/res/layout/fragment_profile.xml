@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.ProfileFragment"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/profile"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:id="@+id/profile_image"
+            tools:ignore="ContentDescription" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan nama lengkap"
+            android:inputType="text"
+            android:background="@drawable/custom_background_edit_text"
+            android:padding="8dp"
+            android:id="@+id/profile_nama_lengkap"
+            android:importantForAutofill="no"
+            android:layout_marginBottom="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginBottom="5dp"
+            android:hint="Masukkan tanggal lahir"
+            android:background="@drawable/custom_background_edit_text"
+            android:padding="8dp"
+            android:id="@+id/profile_tanggal_lahir"
+            android:importantForAutofill="no" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan alamat"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/custom_background_edit_text"
+            android:padding="8dp"
+            android:inputType="text"
+            android:id="@+id/profile_alamat"
+            android:importantForAutofill="no" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan email"
+            android:layout_marginBottom="5dp"
+            android:inputType="text"
+            android:background="@drawable/custom_background_edit_text"
+            android:padding="8dp"
+            android:id="@+id/profile_email"
+            android:importantForAutofill="no"
+            tools:ignore="TextFields" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_background_edit_text"
+            android:padding="8dp"
+            android:hint="Masukkan username"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/profile_username"
+            android:inputType="text"
+            android:importantForAutofill="no" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan password"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/custom_background_edit_text"
+            android:padding="8dp"
+            android:inputType="text"
+            android:id="@+id/profile_password"
+            android:importantForAutofill="no"
+            tools:ignore="TextFields" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan konfirmasi password"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/custom_background_edit_text"
+            android:padding="8dp"
+            android:inputType="text"
+            android:id="@+id/profile_konfirmasi_password"
+            android:importantForAutofill="no"
+            tools:ignore="TextFields" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UPDATE"
+            android:background="@drawable/custom_background_edit_text"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/profile_button_update"
+            android:layout_margin="10dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOGOUT"
+            android:background="@drawable/custom_background_edit_text"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/profile_button_logout"/>
+    </LinearLayout>
+
+</ScrollView>
