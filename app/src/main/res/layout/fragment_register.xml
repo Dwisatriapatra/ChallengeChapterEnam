@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragment.RegisterFragment"
-    android:padding="20dp">
+    android:padding="20dp"
+    tools:ignore="HardcodedText">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center_horizontal"
-            android:textColor="@color/black" />
+            android:textColor="@color/white"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -26,29 +27,35 @@
             android:layout_margin="20dp"
             tools:ignore="ContentDescription" />
         <EditText
+            android:textColorHint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan nama lengkap"
             android:inputType="text"
             android:background="@drawable/custom_background_edit_text"
             android:padding="8dp"
+            android:textColor="@color/white"
             android:id="@+id/register_input_nama"
             android:importantForAutofill="no"
             android:layout_marginBottom="5dp"/>
         <EditText
+            android:textColorHint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:layout_marginBottom="5dp"
             android:hint="Masukkan tanggal lahir"
+            android:textColor="@color/white"
             android:background="@drawable/custom_background_edit_text"
             android:padding="8dp"
             android:id="@+id/register_input_tanggal_lahir"
             android:importantForAutofill="no" />
         <EditText
+            android:textColorHint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan alamat"
+            android:textColor="@color/white"
             android:layout_marginBottom="5dp"
             android:background="@drawable/custom_background_edit_text"
             android:padding="8dp"
@@ -56,6 +63,7 @@
             android:id="@+id/register_input_alamat"
             android:importantForAutofill="no" />
         <EditText
+            android:textColorHint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan email"
@@ -63,20 +71,24 @@
             android:inputType="text"
             android:background="@drawable/custom_background_edit_text"
             android:padding="8dp"
+            android:textColor="@color/white"
             android:id="@+id/register_input_email"
             android:importantForAutofill="no"
             tools:ignore="TextFields" />
         <EditText
+            android:textColorHint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_background_edit_text"
             android:padding="8dp"
             android:hint="Masukkan username"
             android:layout_marginBottom="5dp"
+            android:textColor="@color/white"
             android:id="@+id/register_input_username"
             android:inputType="text"
             android:importantForAutofill="no" />
         <EditText
+            android:textColorHint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan password"
@@ -84,10 +96,12 @@
             android:background="@drawable/custom_background_edit_text"
             android:padding="8dp"
             android:inputType="text"
+            android:textColor="@color/white"
             android:id="@+id/register_input_password"
             android:importantForAutofill="no"
             tools:ignore="TextFields" />
         <EditText
+            android:textColorHint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan konfirmasi password"
@@ -97,7 +111,8 @@
             android:inputType="text"
             android:id="@+id/register_input_konfirmasi_password"
             android:importantForAutofill="no"
-            tools:ignore="TextFields" />
+            tools:ignore="TextFields"
+            android:textColor="@color/white"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

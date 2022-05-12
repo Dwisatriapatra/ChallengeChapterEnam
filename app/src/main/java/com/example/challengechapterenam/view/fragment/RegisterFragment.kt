@@ -1,23 +1,14 @@
 package com.example.challengechapterenam.view.fragment
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.challengechapterenam.R
 import com.example.challengechapterenam.databinding.FragmentRegisterBinding
-import com.example.challengechapterenam.model.PostNewUser
-import com.example.challengechapterenam.model.RequestUser
-import com.example.challengechapterenam.networking.ApiUserClient
 import com.example.challengechapterenam.viewmodel.ViewModelUserApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
     private var fragmentRegisterBinding: FragmentRegisterBinding? = null

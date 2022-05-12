@@ -40,7 +40,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         userLoginManager.image.asLiveData().observe(viewLifecycleOwner){
             Glide.with(fragmentProfileBinding!!.profileImage.context)
                 .load(it)
-                .error(R.drawable.ic_launcher_background)
+                .error(R.drawable.profile_photo)
                 .override(100, 100)
                 .into(fragmentProfileBinding!!.profileImage)
         }
@@ -70,10 +70,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         AlertDialog.Builder(requireContext())
             .setTitle("Logout")
             .setMessage("Apakah anda yakin ingin logout?")
-            .setNegativeButton("TIDAK"){dialogInterface : DialogInterface, i : Int ->
+            .setNegativeButton("TIDAK"){ dialogInterface : DialogInterface, _: Int ->
                 dialogInterface.dismiss()
             }
-            .setPositiveButton("YA"){dialogInterface : DialogInterface, i : Int ->
+            .setPositiveButton("YA"){ _: DialogInterface, _: Int ->
                 GlobalScope.launch {
                     userLoginManager.clearDataLogin()
                 }
@@ -101,10 +101,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         AlertDialog.Builder(requireContext())
             .setTitle("Update data")
             .setMessage("Yakin ingin mengupdate data?")
-            .setNegativeButton("TIDAK"){dialogInterface : DialogInterface, i : Int ->
+            .setNegativeButton("TIDAK"){ dialogInterface : DialogInterface, _: Int ->
                 dialogInterface.dismiss()
             }
-            .setPositiveButton("YA"){dialogInterface : DialogInterface, i : Int ->
+            .setPositiveButton("YA"){ _: DialogInterface, _: Int ->
                 viewModelUser = ViewModelProvider(this).get(ViewModelUserApi::class.java)
                 viewModelUser.updateUserApi(id, alamat, email, image, username, tanggalLahir, password, namaLengkap)
 

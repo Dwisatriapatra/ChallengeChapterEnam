@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".view.fragment.DetailFragment">
+    tools:context=".view.fragment.DetailFragment"
+    tools:ignore="HardcodedText">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,29 +21,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="JUDUL : "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:id="@+id/detail_title"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp" />
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TANGGAL RILIS : "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginBottom="5dp"
             android:id="@+id/detail_release_date"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="SUTRADARA : "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginBottom="5dp"
             android:id="@+id/detail_director"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DESKRIPSI : "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginBottom="5dp"
             android:id="@+id/detail_description"/>
     </LinearLayout>
-</ScrollView>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:id="@+id/detail_add_to_favorite"
+        android:src="@drawable/favorite_icon"/>
+</RelativeLayout>

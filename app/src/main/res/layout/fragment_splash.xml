@@ -19,7 +19,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
         android:text="KATALOG FILM"
@@ -30,6 +30,6 @@
         android:text="Dwi Satria Patra"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>

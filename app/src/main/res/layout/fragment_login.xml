@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragment.LoginFragment"
-    android:padding="20dp">
+    android:padding="20dp"
+    tools:ignore="HardcodedText">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,12 +15,11 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="Login"
             android:gravity="center_horizontal"
             android:layout_alignParentTop="true"
-            android:id="@+id/textview_login"
-            />
+            android:id="@+id/textview_login"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -34,6 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:hint="Masukkan email"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
             android:inputType="text"
             android:background="@drawable/custom_background_edit_text"
             android:padding="8dp"
@@ -47,14 +49,36 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:hint="Masukkan password"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:inputType="text"
             android:background="@drawable/custom_background_edit_text"
             android:padding="8dp"
-            android:inputType="text"
-            android:layout_marginBottom="20dp"
             android:layout_below="@id/login_input_email"
             android:id="@+id/login_input_password"
             android:importantForAutofill="no"
+            android:layout_marginBottom="20dp"
             tools:ignore="TextFields" />
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColorHint="@color/white"-->
+<!--            android:id="@+id/wrap_login_input_password"-->
+<!--            app:passwordToggleEnabled="true"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            app:hintTextColor="@color/white"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            app:passwordToggleTint="@color/white"-->
+<!--            android:layout_below="@id/login_input_email">-->
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:hint="Masukkan password"-->
+<!--                android:background="@drawable/custom_background_edit_text"-->
+<!--                android:inputType="text"-->
+<!--                android:id="@+id/login_input_password"/>-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,11 +1,10 @@
 package com.example.challengechapterenam.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import com.example.challengechapterenam.R
 import com.example.challengechapterenam.databinding.FragmentLoginBinding
@@ -13,7 +12,6 @@ import com.example.challengechapterenam.datastore.UserLoginManager
 import com.example.challengechapterenam.model.GetAllUserResponseItem
 import com.example.challengechapterenam.viewmodel.ViewModelUserApi
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.fragment_login) {

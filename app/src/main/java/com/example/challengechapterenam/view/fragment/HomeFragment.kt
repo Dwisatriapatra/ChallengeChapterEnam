@@ -1,11 +1,10 @@
 package com.example.challengechapterenam.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
@@ -60,6 +59,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     //function for get profile
+    @SuppressLint("SetTextI18n")
     private fun getUserProfile(){
         userLoginFragment = UserLoginManager(requireContext())
         userLoginFragment.username.asLiveData().observe(viewLifecycleOwner){
