@@ -3,10 +3,9 @@ package com.example.challengechapterenam.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.challengechapterenam.dataclass.FavoriteFilm
-
+//Dao class for favorite film list
 @Dao
 interface FavoriteFilmDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteFilm(favoriteFilm: FavoriteFilm)
 

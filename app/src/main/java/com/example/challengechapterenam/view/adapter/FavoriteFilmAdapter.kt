@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.challengechapterenam.databinding.ItemFilmAdapterBinding
 import com.example.challengechapterenam.dataclass.FavoriteFilm
-
+//adapter class for favorite film list
 class FavoriteFilmAdapter(private val onClick : (FavoriteFilm) -> Unit) :
 RecyclerView.Adapter<FavoriteFilmAdapter.ViewHolder>(){
 

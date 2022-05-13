@@ -38,6 +38,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
+    //this function wil get all data of user from REST API, provided by view model
     private fun initUserApiViewModel() {
         viewModelUserApi = ViewModelProvider(
             this, ViewModelFactoryUser(UserRepository(apiUserServices))
@@ -50,6 +51,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         viewModelUserApi.getAllUser()
     }
 
+    //login authentication function
     private fun loginAuth(list: List<GetAllUserResponseItem>) {
         userLoginManager = UserLoginManager(requireContext())
 
@@ -57,9 +59,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val inputanEmail = fragmentLoginBinding!!.loginInputEmail.text.toString()
         val inputanPassword = fragmentLoginBinding!!.loginInputPassword.text.toString()
 
+        //check data
         if(inputanEmail.isNotEmpty() && inputanPassword.isNotEmpty()){
             for(i in list.indices){
                 if(inputanEmail == list[i].email && inputanPassword == list[i].password){
+                    //if logging in succeded, save the user data
                     Toast.makeText(requireContext(), "Berhasil login", Toast.LENGTH_SHORT).show()
                     GlobalScope.launch {
                         userLoginManager.setBoolean(true)

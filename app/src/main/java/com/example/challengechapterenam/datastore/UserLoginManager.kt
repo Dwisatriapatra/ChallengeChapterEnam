@@ -5,7 +5,7 @@ import androidx.datastore.DataStore
 import androidx.datastore.preferences.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-
+//user login manager to manage data of user that logged in now
 class UserLoginManager(context: Context) {
     private val dataStore: DataStore<Preferences> = context.createDataStore("login-prefs")
 

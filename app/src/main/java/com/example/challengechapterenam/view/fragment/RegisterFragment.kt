@@ -30,6 +30,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
     }
 
+    //get all user input, then call postUser function
     private fun tambahUser(){
         val nama = fragmentRegisterBinding!!.registerInputNama.text.toString()
         val username = fragmentRegisterBinding!!.registerInputUsername.text.toString()
@@ -56,6 +57,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
     }
 
+    //post user is function to use addNewUser function that provided by view model
     private fun postUser(
         alamat: String,
         email: String,
@@ -70,7 +72,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         ).get(ViewModelUserApi::class.java)
         viewModelUserApi.addNewUser(alamat, email, image, username, tanggalLahir, password, name)
 
-        // disini toast sebenarnya gagal, tapi data tetap masuk ke api
+        // toast
         Toast.makeText(requireContext(), "Registrasi berhasil", Toast.LENGTH_SHORT).show()
         Navigation.findNavController(requireView()).navigate(R.id.action_registerFragment_to_loginFragment)
     }

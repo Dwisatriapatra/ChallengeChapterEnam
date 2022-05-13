@@ -49,6 +49,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         getFavoriteFilmData()
     }
 
+    //init recycler view of favorite film list
     private fun initRecyclerView() {
         fragmentFavoriteBinding!!.rvFavoriteFilm.layoutManager =
             LinearLayoutManager(requireContext())
@@ -60,6 +61,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         fragmentFavoriteBinding!!.rvFavoriteFilm.adapter = favoriteFilmAdapter
     }
 
+    //this function will call getFavoriteFilm that provided by view model
     private fun getFavoriteFilmData() {
         CoroutineScope(Dispatchers.Main).launch {
             favoriteFilmViewModel.getFavoriteFilm().observe(viewLifecycleOwner) {

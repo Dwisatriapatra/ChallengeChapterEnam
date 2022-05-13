@@ -8,12 +8,10 @@ import com.example.challengechapterenam.repository.FilmApiRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+//view model class for list of film
 class ViewModelFilmApi(private val repository: FilmApiRepository) : ViewModel() {
     val liveDataFilmApi = MutableLiveData<List<GetAllFilmResponseItem>>()
-//    fun getLiveDataFilmApiObserver() : MutableLiveData<List<GetAllFilmResponseItem>>{
-//        return liveDataFilmApi
-//    }
+    //function to get all data of film
     fun getAllFilmApi(){
         val response = repository.getAllFilmApi()
         response.enqueue(object : Callback<List<GetAllFilmResponseItem>>{

@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-
+//favorite film data class
 @Parcelize
 @Entity(tableName = "favorite_film")
 data class FavoriteFilm(

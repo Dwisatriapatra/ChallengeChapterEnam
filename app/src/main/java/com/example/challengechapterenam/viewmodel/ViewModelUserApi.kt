@@ -13,10 +13,7 @@ import retrofit2.Response
 class ViewModelUserApi(private val repository: UserRepository) : ViewModel() {
     //init live data
     val liveDataUserApi = MutableLiveData<List<GetAllUserResponseItem>>()
-
-//    fun getLiveUserApiObserver() : MutableLiveData<List<GetAllUserResponseItem>>{
-//        return liveDataUserApi
-//    }
+    //function to get all data of user
     fun getAllUser(){
         val response = repository.getAllUser()
         response.enqueue(object : Callback<List<GetAllUserResponseItem>>{

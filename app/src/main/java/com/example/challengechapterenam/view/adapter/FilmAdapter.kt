@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.challengechapterenam.R
 import com.example.challengechapterenam.databinding.ItemFilmAdapterBinding
 import com.example.challengechapterenam.model.GetAllFilmResponseItem
-
+//adapter class for list of film
 class FilmAdapter(
     private val onClick : (GetAllFilmResponseItem) -> Unit
 ) : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {

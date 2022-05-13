@@ -49,8 +49,10 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         getAllDetails()
     }
 
+    //function to get all film details
     @SuppressLint("SetTextI18n")
     private fun getAllDetails() {
+        //check if previous fragment was home or list favorite film
         if(requireArguments().containsKey("FILMDATA")){
             val filmDetail = arguments?.getSerializable("FILMDATA") as GetAllFilmResponseItem
             fragmentDetailBinding!!.detailTitle.text = "Judul : \n${filmDetail.name}"
@@ -63,6 +65,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 .override(100, 100)
                 .into(fragmentDetailBinding!!.detailImage)
 
+            //addToFavorite button will add new favorite film if clicked
             fragmentDetailBinding!!.detailAddToFavorite.setOnClickListener {
                 AlertDialog.Builder(requireContext())
                     .setTitle("Tambah ke favorit")
@@ -96,6 +99,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 .error(R.drawable.ic_launcher_background)
                 .override(100, 100)
                 .into(fragmentDetailBinding!!.detailImage)
+            //addToFavorite button will remove film from list of favorite film
             fragmentDetailBinding!!.detailAddToFavorite.setOnClickListener {
                 AlertDialog.Builder(requireContext())
                     .setTitle("HAPUS FILM DARI LIST FAVORIT")
@@ -109,6 +113,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         }
     }
+
+    //this function will call userFavoriteFilm that provided by view model
     private fun insertNewFavoriteFilm(favoriteFilm: FavoriteFilm) {
         CoroutineScope(Dispatchers.Main).launch {
             favoriteFilmViewModel.insertFavoriteFilm(favoriteFilm).also {
@@ -116,13 +122,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         }
     }
-//    private fun deleteFavoriteFilmFromList(favoriteFilm: FavoriteFilm){
-//        CoroutineScope(Dispatchers.Main).launch {
-//            favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm).also {
-//                Toast.makeText(requireContext(), "Berhasil dihapus", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
+
+    //this function will call deleteFavoriteFilmById that provided by view model
     private fun deleteFavoriteFilmById(id : Int) {
         CoroutineScope(Dispatchers.Main).launch {
             favoriteFilmViewModel.deleteFavoriteFilmById(id).also {

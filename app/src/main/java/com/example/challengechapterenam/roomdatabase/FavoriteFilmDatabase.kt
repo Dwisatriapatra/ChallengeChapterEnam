@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.challengechapterenam.dao.FavoriteFilmDao
 import com.example.challengechapterenam.dataclass.FavoriteFilm
-
+//database class for favorite film list
 @Database(entities = [FavoriteFilm::class], version = 1, exportSchema = false)
 abstract class FavoriteFilmDatabase : RoomDatabase() {
     abstract fun favoriteFilmDao() : FavoriteFilmDao

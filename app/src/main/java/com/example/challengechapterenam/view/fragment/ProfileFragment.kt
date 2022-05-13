@@ -40,6 +40,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
+    //init original data to the profile page
     private fun initField() {
         userLoginManager = UserLoginManager(requireContext())
         userLoginManager.image.asLiveData().observe(viewLifecycleOwner){
@@ -70,6 +71,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
+    //log out function, will erase user data that stored in data store
     private fun logout() {
         userLoginManager = UserLoginManager(requireContext())
         AlertDialog.Builder(requireContext())
@@ -88,6 +90,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             }.show()
     }
 
+    //function to update data, will call function updateUser that provided by view model
     private fun updateData() {
         userLoginManager = UserLoginManager(requireContext())
 
@@ -99,7 +102,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         val tanggalLahir = fragmentProfileBinding!!.profileTanggalLahir.text.toString()
         val password = fragmentProfileBinding!!.profilePassword.text.toString()
         val namaLengkap = fragmentProfileBinding!!.profileNamaLengkap.text.toString()
-
+        //get id for current user
         userLoginManager.IDuser.asLiveData().observe(viewLifecycleOwner){
             id = it.toString()
         }
@@ -124,9 +127,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     namaLengkap
                 )
 
-                // disini toast sebenarnya gagal, tapi data di api tetap berhasil diupdate
+                //change previous data that stored in data store
                 Toast.makeText(requireContext(), "Update data berhasil", Toast.LENGTH_SHORT).show()
-                //ganti data yang ada di datastore
                 GlobalScope.launch {
                     userLoginManager.saveDataLogin(
                         alamat,

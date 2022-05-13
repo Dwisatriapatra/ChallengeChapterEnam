@@ -23,6 +23,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
         userLoginManager = UserLoginManager(requireContext())
         Handler(Looper.getMainLooper()).postDelayed({
+            //check if user was logging in or not
             userLoginManager.boolean.asLiveData().observe(viewLifecycleOwner) {
                 if (it == true) {
                     Navigation.findNavController(view)

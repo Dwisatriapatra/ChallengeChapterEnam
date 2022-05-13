@@ -43,6 +43,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    //init recycler view for film list
     private fun initRecyclerView() {
         fragmentHomeBinding!!.rvFilm.layoutManager = LinearLayoutManager(requireContext())
         adapterFilm = FilmAdapter {
@@ -53,6 +54,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         fragmentHomeBinding!!.rvFilm.adapter = adapterFilm
     }
 
+    //this function will call getAllFilm function that provided by view model and set it on
+    // recycler view
     private fun getFilmDataViewModel() {
         filmViewModel = ViewModelProvider(
             this, ViewModelFactoryFilmApi(FilmApiRepository(apiFilmServices))
