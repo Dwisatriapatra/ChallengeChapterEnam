@@ -2,7 +2,7 @@ package com.example.challengechapterenam.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.challengechapterenam.roomdatabase.FavoriteFilmRepository
+import com.example.challengechapterenam.repository.FavoriteFilmRepository
 
 class ViewModelFactoryFavoriteFilm(
     private val repository: FavoriteFilmRepository

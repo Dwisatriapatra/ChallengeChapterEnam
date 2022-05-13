@@ -1,7 +1,8 @@
-package com.example.challengechapterenam.roomdatabase
+package com.example.challengechapterenam.repository
 
 import androidx.lifecycle.LiveData
 import com.example.challengechapterenam.dataclass.FavoriteFilm
+import com.example.challengechapterenam.roomdatabase.FavoriteFilmDatabase
 
 class FavoriteFilmRepository(
     private val favoriteFilmDatabase : FavoriteFilmDatabase

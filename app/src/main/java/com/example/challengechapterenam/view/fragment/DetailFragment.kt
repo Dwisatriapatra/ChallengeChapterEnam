@@ -16,7 +16,7 @@ import com.example.challengechapterenam.dataclass.FavoriteFilm
 import com.example.challengechapterenam.datastore.UserLoginManager
 import com.example.challengechapterenam.model.GetAllFilmResponseItem
 import com.example.challengechapterenam.roomdatabase.FavoriteFilmDatabase
-import com.example.challengechapterenam.roomdatabase.FavoriteFilmRepository
+import com.example.challengechapterenam.repository.FavoriteFilmRepository
 import com.example.challengechapterenam.viewmodel.ViewModelFactoryFavoriteFilm
 import com.example.challengechapterenam.viewmodel.ViewModelFavoriteFilm
 import kotlinx.coroutines.CoroutineScope

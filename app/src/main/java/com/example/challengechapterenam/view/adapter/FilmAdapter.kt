@@ -17,6 +17,7 @@ class FilmAdapter(
 
     fun setDataFilm(list : List<GetAllFilmResponseItem>){
         this.listFilm = list
+        notifyDataSetChanged()
     }
 
 

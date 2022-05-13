@@ -12,7 +12,7 @@ import com.example.challengechapterenam.R
 import com.example.challengechapterenam.databinding.FragmentFavoriteBinding
 import com.example.challengechapterenam.datastore.UserLoginManager
 import com.example.challengechapterenam.roomdatabase.FavoriteFilmDatabase
-import com.example.challengechapterenam.roomdatabase.FavoriteFilmRepository
+import com.example.challengechapterenam.repository.FavoriteFilmRepository
 import com.example.challengechapterenam.view.adapter.FavoriteFilmAdapter
 import com.example.challengechapterenam.viewmodel.ViewModelFactoryFavoriteFilm
 import com.example.challengechapterenam.viewmodel.ViewModelFavoriteFilm
