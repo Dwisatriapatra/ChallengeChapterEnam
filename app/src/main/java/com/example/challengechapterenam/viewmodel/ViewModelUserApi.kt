@@ -5,38 +5,36 @@ import androidx.lifecycle.ViewModel
 import com.example.challengechapterenam.model.GetAllUserResponseItem
 import com.example.challengechapterenam.model.PostNewUser
 import com.example.challengechapterenam.model.RequestUser
-import com.example.challengechapterenam.networking.ApiUserClient
+import com.example.challengechapterenam.repository.UserRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ViewModelUserApi : ViewModel() {
+class ViewModelUserApi(private val repository: UserRepository) : ViewModel() {
     //init live data
-    var liveDataUserApi: MutableLiveData<List<GetAllUserResponseItem>> = MutableLiveData()
+    val liveDataUserApi = MutableLiveData<List<GetAllUserResponseItem>>()
 
-    fun getLiveUserApiObserver() : MutableLiveData<List<GetAllUserResponseItem>>{
-        return liveDataUserApi
-    }
-    fun setLiveDataUserApi(){
-        ApiUserClient.instance.getAllUser()
-            .enqueue(object : Callback<List<GetAllUserResponseItem>> {
-                override fun onResponse(
-                    call: Call<List<GetAllUserResponseItem>>,
-                    response: Response<List<GetAllUserResponseItem>>
-                ) {
-                    if(response.isSuccessful){
-                        liveDataUserApi.postValue(response.body())
-                    }else{
-                        liveDataUserApi.postValue(null)
-                    }
-                }
-                override fun onFailure(call: Call<List<GetAllUserResponseItem>>, t: Throwable) {
-                    liveDataUserApi.postValue(null)
-                }
+//    fun getLiveUserApiObserver() : MutableLiveData<List<GetAllUserResponseItem>>{
+//        return liveDataUserApi
+//    }
+    fun getAllUser(){
+        val response = repository.getAllUser()
+        response.enqueue(object : Callback<List<GetAllUserResponseItem>>{
+            override fun onResponse(
+                call: Call<List<GetAllUserResponseItem>>,
+                response: Response<List<GetAllUserResponseItem>>
+            ) {
+                liveDataUserApi.postValue(response.body())
+            }
 
-            })
+            override fun onFailure(call: Call<List<GetAllUserResponseItem>>, t: Throwable) {
+                //nothing
+            }
+
+        })
     }
-    fun addNewUserApi(
+
+    fun addNewUser(
         alamat: String,
         email: String,
         image: String,
@@ -46,9 +44,10 @@ class ViewModelUserApi : ViewModel() {
         name: String
     ) : Boolean{
         var messageResponse = false
-        ApiUserClient.instance.postDataUser(
+        val response = repository.addDataUser(
             RequestUser(alamat, email, image, name, password, tanggalLahir, username)
-        ).enqueue(object : Callback<PostNewUser>{
+        )
+        response.enqueue(object : Callback<PostNewUser>{
             override fun onResponse(call: Call<PostNewUser>, response: Response<PostNewUser>) {
                 messageResponse = response.isSuccessful
             }
@@ -56,11 +55,10 @@ class ViewModelUserApi : ViewModel() {
             override fun onFailure(call: Call<PostNewUser>, t: Throwable) {
                 messageResponse = false
             }
-
         })
         return messageResponse
     }
-    fun updateUserApi(
+    fun updateUser(
         id: String,
         alamat: String,
         email: String,
@@ -71,9 +69,10 @@ class ViewModelUserApi : ViewModel() {
         name: String
     ) : Boolean{
         var message = false
-        ApiUserClient.instance.updateUser(
+        val response = repository.updateDataUser(
             id, RequestUser(alamat, email, image, name, password, tanggalLahir, username)
-        ).enqueue(object : Callback<List<GetAllUserResponseItem>>{
+        )
+        response.enqueue(object : Callback<List<GetAllUserResponseItem>>{
             override fun onResponse(
                 call: Call<List<GetAllUserResponseItem>>,
                 response: Response<List<GetAllUserResponseItem>>

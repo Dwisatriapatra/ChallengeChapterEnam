@@ -12,6 +12,9 @@ import com.bumptech.glide.Glide
 import com.example.challengechapterenam.R
 import com.example.challengechapterenam.databinding.FragmentProfileBinding
 import com.example.challengechapterenam.datastore.UserLoginManager
+import com.example.challengechapterenam.networking.ApiUserServices
+import com.example.challengechapterenam.repository.UserRepository
+import com.example.challengechapterenam.viewmodel.ViewModelFactoryUser
 import com.example.challengechapterenam.viewmodel.ViewModelUserApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,6 +23,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var fragmentProfileBinding : FragmentProfileBinding? = null
     private lateinit var userLoginManager: UserLoginManager
     private lateinit var viewModelUser : ViewModelUserApi
+
+    private var apiUserInterface = ApiUserServices.getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -105,8 +110,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 dialogInterface.dismiss()
             }
             .setPositiveButton("YA"){ _: DialogInterface, _: Int ->
-                viewModelUser = ViewModelProvider(this).get(ViewModelUserApi::class.java)
-                viewModelUser.updateUserApi(id, alamat, email, image, username, tanggalLahir, password, namaLengkap)
+                viewModelUser = ViewModelProvider(this,
+                    ViewModelFactoryUser(UserRepository(apiUserInterface))
+                ).get(ViewModelUserApi::class.java)
+
+                viewModelUser.updateUser(id,
+                    alamat,
+                    email,
+                    image,
+                    username,
+                    tanggalLahir,
+                    password,
+                    namaLengkap
+                )
 
                 // disini toast sebenarnya gagal, tapi data di api tetap berhasil diupdate
                 Toast.makeText(requireContext(), "Update data berhasil", Toast.LENGTH_SHORT).show()

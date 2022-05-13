@@ -10,6 +10,9 @@ import com.example.challengechapterenam.R
 import com.example.challengechapterenam.databinding.FragmentLoginBinding
 import com.example.challengechapterenam.datastore.UserLoginManager
 import com.example.challengechapterenam.model.GetAllUserResponseItem
+import com.example.challengechapterenam.networking.ApiUserServices
+import com.example.challengechapterenam.repository.UserRepository
+import com.example.challengechapterenam.viewmodel.ViewModelFactoryUser
 import com.example.challengechapterenam.viewmodel.ViewModelUserApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -18,6 +21,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private var fragmentLoginBinding : FragmentLoginBinding? = null
     private lateinit var viewModelUserApi : ViewModelUserApi
     private lateinit var userLoginManager : UserLoginManager
+
+    private val apiUserServices = ApiUserServices.getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,13 +39,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun initUserApiViewModel() {
-        viewModelUserApi = ViewModelProvider(this).get(ViewModelUserApi::class.java)
-        viewModelUserApi.setLiveDataUserApi()
-        viewModelUserApi.getLiveUserApiObserver().observe(viewLifecycleOwner){
+        viewModelUserApi = ViewModelProvider(
+            this, ViewModelFactoryUser(UserRepository(apiUserServices))
+        ).get(ViewModelUserApi::class.java)
+        viewModelUserApi.liveDataUserApi.observe(viewLifecycleOwner){
             if(it.isNotEmpty()){
                 loginAuth(it)
             }
         }
+        viewModelUserApi.getAllUser()
     }
 
     private fun loginAuth(list: List<GetAllUserResponseItem>) {
