@@ -1,7 +1,9 @@
 package com.example.challengechapterenam.view.fragment
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -10,6 +12,7 @@ import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -29,15 +32,22 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var fragmentProfileBinding : FragmentProfileBinding? = null
     private lateinit var userLoginManager: UserLoginManager
     private lateinit var viewModelUser : ViewModelUserApi
-
     private var apiUserInterface = ApiUserServices.getInstance()
+    private lateinit var takeImage: ActivityResultLauncher<Intent>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        takeImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { data ->
+            if (data.resultCode == Activity.RESULT_OK) {
+                handleImageTakenFromCamera(data.data)
+            }
+        }
         val binding = FragmentProfileBinding.bind(view)
         fragmentProfileBinding = binding
 
+        //init
         initField()
+
         fragmentProfileBinding!!.profileButtonLogout.setOnClickListener {
             logout()
         }
@@ -45,61 +55,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             updateData()
         }
         fragmentProfileBinding!!.buttonEditProfileImage.setOnClickListener {
-            galleryResult.launch("image/*")
+            AlertDialog.Builder(requireContext())
+                .setTitle("UBAH FOTO PROFILE")
+                .setMessage("Pilih metode untuk mengambil foto profile yang baru")
+                .setNeutralButton("Batal"){dialogIterface : DialogInterface, _ : Int ->
+                    dialogIterface.dismiss()
+                }.setPositiveButton("Penyimpanan"){_: DialogInterface, _ : Int ->
+                    openImageGallery()
+                }
+                .setNegativeButton("Kamera"){_ : DialogInterface, _ : Int ->
+                    openCamera()
+                }.show()
         }
     }
-
-    //convert a bitmap to string
-    private fun convertBitMapToString(bitmap: Bitmap): String? {
-        val byteArray = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray)
-        val b: ByteArray = byteArray.toByteArray()
-        return Base64.encodeToString(b, Base64.DEFAULT)
-    }
-
-    //convert a string to bitmap
-    private fun convertStringToBitmap(string: String?): Bitmap? {
-        val byteArray1: ByteArray = Base64.decode(string, Base64.DEFAULT)
-        return BitmapFactory.decodeByteArray(
-            byteArray1, 0,
-            byteArray1.size
-        )
-    }
-
-    //function to open gallery and set profile image
-    private val galleryResult =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
-            val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, result)
-            userLoginManager = UserLoginManager(requireContext())
-            val dstBmp : Bitmap
-
-            if (bitmap.width >= bitmap.height){
-                dstBmp = Bitmap.createBitmap(
-                    bitmap,
-                    bitmap.width /2 - bitmap.height /2,
-                    0,
-                    bitmap.height,
-                    bitmap.height
-                )
-
-            }else{
-                dstBmp = Bitmap.createBitmap(
-                    bitmap,
-                    0,
-                    bitmap.height /2 - bitmap.width /2,
-                    bitmap.width,
-                    bitmap.width
-                )
-            }
-            val bitmaps = Bitmap.createScaledBitmap(dstBmp, 720, 720, true)
-            val str = convertBitMapToString(bitmaps)!!
-
-            GlobalScope.launch {
-                userLoginManager.setImageProfile(str)
-            }
-            fragmentProfileBinding!!.profileImage.setImageBitmap(convertStringToBitmap(str))
-            Toast.makeText(requireContext(), "Image Updated", Toast.LENGTH_SHORT).show()
-        }
 
     //init original data to the profile page
     private fun initField() {
@@ -215,5 +183,98 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 activity?.finish()
                 startActivity(mIntent)
             }.show()
+    }
+
+    //convert a bitmap to string
+    private fun convertBitMapToString(input: Bitmap): String? {
+        val byteArray = ByteArrayOutputStream()
+        input.compress(Bitmap.CompressFormat.PNG, 100, byteArray)
+        val b: ByteArray = byteArray.toByteArray()
+        return Base64.encodeToString(b, Base64.DEFAULT)
+    }
+
+    //convert a string to bitmap
+    private fun convertStringToBitmap(input: String?): Bitmap? {
+        val byteArray1: ByteArray = Base64.decode(input, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(
+            byteArray1, 0,
+            byteArray1.size
+        )
+    }
+
+    //function to open gallery and set profile image
+    private fun openImageGallery(){
+        val bitmapResult =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
+                val originBitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, result)
+                userLoginManager = UserLoginManager(requireContext())
+                val editedBitmap : Bitmap
+
+                if (originBitmap.width >= originBitmap.height){
+                    editedBitmap = Bitmap.createBitmap(
+                        originBitmap,
+                        originBitmap.width /2 - originBitmap.height /2,
+                        0,
+                        originBitmap.height,
+                        originBitmap.height
+                    )
+
+                }else{
+                    editedBitmap = Bitmap.createBitmap(
+                        originBitmap,
+                        0,
+                        originBitmap.height /2 - originBitmap.width /2,
+                        originBitmap.width,
+                        originBitmap.width
+                    )
+                }
+                val bitmaps = Bitmap.createScaledBitmap(editedBitmap, 720, 720, true)
+                val stringResult = convertBitMapToString(bitmaps)!!
+
+                GlobalScope.launch {
+                    userLoginManager.setImageProfile(stringResult)
+                }
+                fragmentProfileBinding!!.profileImage.setImageBitmap(convertStringToBitmap(stringResult))
+                Toast.makeText(requireContext(), "Foto profile berhasil diupdate", Toast.LENGTH_SHORT).show()
+            }
+        //launch
+        bitmapResult.launch("image/*")
+    }
+
+
+    //these 2 functions and cameraResult will handle "set profile image from camera" features
+    private fun openCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        takeImage.launch(cameraIntent)
+    }
+    private fun handleImageTakenFromCamera(a : Intent?){
+        val originBitmap = a?.extras?.get("data") as Bitmap
+        val editedBitmap : Bitmap
+
+        if (originBitmap.width >= originBitmap.height){
+            editedBitmap = Bitmap.createBitmap(
+                originBitmap,
+                originBitmap.width /2 - originBitmap.height /2,
+                0,
+                originBitmap.height,
+                originBitmap.height
+            )
+
+        }else{
+            editedBitmap = Bitmap.createBitmap(
+                originBitmap,
+                0,
+                originBitmap.height /2 - originBitmap.width /2,
+                originBitmap.width,
+                originBitmap.width
+            )
+        }
+
+        val stringResult = convertBitMapToString(editedBitmap)
+        GlobalScope.launch {
+            userLoginManager.setImageProfile(stringResult!!)
+        }
+        fragmentProfileBinding!!.profileImage.setImageBitmap(convertStringToBitmap(stringResult))
+        Toast.makeText(requireContext(), "Foto profile berhasil diupdate", Toast.LENGTH_SHORT).show()
     }
 }
