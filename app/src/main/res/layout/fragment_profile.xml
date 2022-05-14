@@ -19,14 +19,26 @@
             android:textStyle="bold"
             android:gravity="center_horizontal"
             android:textColor="@color/white"/>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/profile"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:id="@+id/profile_image"
-            tools:ignore="ContentDescription" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/profile"
+                android:layout_centerInParent="true"
+                android:id="@+id/profile_image"
+                tools:ignore="ContentDescription" />
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:layout_centerInParent="true"
+                android:alpha="0.4"
+                android:id="@+id/button_edit_profile_image"/>
+        </RelativeLayout>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

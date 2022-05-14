@@ -2,10 +2,15 @@ package com.example.challengechapterenam.view.fragment
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.bumptech.glide.Glide
@@ -18,6 +23,7 @@ import com.example.challengechapterenam.viewmodel.ViewModelFactoryUser
 import com.example.challengechapterenam.viewmodel.ViewModelUserApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var fragmentProfileBinding : FragmentProfileBinding? = null
@@ -38,18 +44,81 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         fragmentProfileBinding!!.profileButtonUpdate.setOnClickListener {
             updateData()
         }
+        fragmentProfileBinding!!.buttonEditProfileImage.setOnClickListener {
+            galleryResult.launch("image/*")
+        }
     }
+
+    //convert a bitmap to string
+    private fun convertBitMapToString(bitmap: Bitmap): String? {
+        val byteArray = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray)
+        val b: ByteArray = byteArray.toByteArray()
+        return Base64.encodeToString(b, Base64.DEFAULT)
+    }
+
+    //convert a string to bitmap
+    private fun convertStringToBitmap(string: String?): Bitmap? {
+        val byteArray1: ByteArray = Base64.decode(string, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(
+            byteArray1, 0,
+            byteArray1.size
+        )
+    }
+
+    //function to open gallery and set profile image
+    private val galleryResult =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
+            val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, result)
+            userLoginManager = UserLoginManager(requireContext())
+            val dstBmp : Bitmap
+
+            if (bitmap.width >= bitmap.height){
+                dstBmp = Bitmap.createBitmap(
+                    bitmap,
+                    bitmap.width /2 - bitmap.height /2,
+                    0,
+                    bitmap.height,
+                    bitmap.height
+                )
+
+            }else{
+                dstBmp = Bitmap.createBitmap(
+                    bitmap,
+                    0,
+                    bitmap.height /2 - bitmap.width /2,
+                    bitmap.width,
+                    bitmap.width
+                )
+            }
+            val bitmaps = Bitmap.createScaledBitmap(dstBmp, 720, 720, true)
+            val str = convertBitMapToString(bitmaps)!!
+
+            GlobalScope.launch {
+                userLoginManager.setImageProfile(str)
+            }
+            fragmentProfileBinding!!.profileImage.setImageBitmap(convertStringToBitmap(str))
+            Toast.makeText(requireContext(), "Image Updated", Toast.LENGTH_SHORT).show()
+        }
 
     //init original data to the profile page
     private fun initField() {
         userLoginManager = UserLoginManager(requireContext())
-        userLoginManager.image.asLiveData().observe(viewLifecycleOwner){
-            Glide.with(fragmentProfileBinding!!.profileImage.context)
-                .load(it)
-                .error(R.drawable.profile_photo)
-                .override(100, 100)
-                .into(fragmentProfileBinding!!.profileImage)
+
+        userLoginManager.imageProfile.asLiveData().observe(viewLifecycleOwner){
+            if(it.isNullOrEmpty()){
+                userLoginManager.image.asLiveData().observe(viewLifecycleOwner){ result ->
+                    Glide.with(fragmentProfileBinding!!.profileImage.context)
+                        .load(result)
+                        .error(R.drawable.profile_photo)
+                        .override(100, 100)
+                        .into(fragmentProfileBinding!!.profileImage)
+                }
+            }else{
+                fragmentProfileBinding!!.profileImage.setImageBitmap(convertStringToBitmap(it))
+            }
         }
+
         userLoginManager.name.asLiveData().observe(viewLifecycleOwner){
             fragmentProfileBinding!!.profileNamaLengkap.setText(it.toString())
         }

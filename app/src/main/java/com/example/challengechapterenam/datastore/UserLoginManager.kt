@@ -18,6 +18,7 @@ class UserLoginManager(context: Context) {
         val PASSWORD = preferencesKey<String>("PASSWORD")
         val DATE_OF_BIRTH = preferencesKey<String>("DATE_OF_BIRTH")
         val USERNAME = preferencesKey<String>("USERNAME")
+        val IMAGEPROFILE = preferencesKey<String>("IMAGEPROFILE")
         val BOOLEAN = preferencesKey<Boolean>("BOOLEAN")
     }
 
@@ -40,6 +41,12 @@ class UserLoginManager(context: Context) {
             it[PASSWORD] = password
             it[DATE_OF_BIRTH] = dateOfBirth
             it[USERNAME] = username
+        }
+    }
+
+    suspend fun setImageProfile(string : String){
+        dataStore.edit {
+            it[IMAGEPROFILE] = string
         }
     }
 
@@ -89,5 +96,9 @@ class UserLoginManager(context: Context) {
 
     val boolean : Flow<Boolean> = dataStore.data.map {
         it[BOOLEAN] ?: false
+    }
+
+    val imageProfile : Flow<String> = dataStore.data.map {
+        it[IMAGEPROFILE] ?: ""
     }
 }
