@@ -1,14 +1,14 @@
-#Challenge Chapter 6 From Binar Academy
+CHALLENGE CHAPTER 6 FROM BINAR ACADEMY
 
 This is my project that use mockApi.io to learn how to create apps with using REST API
 
-##NOTE
+NOTE
 
 - Please feel free if you want to clone this project on your android studio
 - If you want to run this project on android studio, you need to activate camera permission on 
   your phone setting because this ap need it in order to run set profile image from camera
   
-###Features
+FEATURES
 
 - Register and login (using mockApi.io)
 - Update user profile
